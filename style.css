@@ -1,0 +1,253 @@
+:root {
+    --bg: #1a1814;            
+    --surface: #1c1f24;      
+    --surface-2: #23262c;     
+    --border: #33373f;
+    --border-soft: #2a2d33;
+    --text: #e9e6df;         
+    --text-muted: #8b8f98;
+    --text-faint: #5c6068;
+    --accent: #a7be40e1;       
+    --accent-dim: #8a733f;
+    --slate: #7c93ab;
+    --sage:  #849a7f;
+    --clay:  #b57e64;
+    --plum:  #96839f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text);
+    padding: 56px 24px 100px;
+  }
+  header {
+    max-width: 880px;
+    margin: 0 auto 44px;
+  }
+  header .eyebrow {
+    font-size: 0.90rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight:1000;
+    margin: 0 0 10px;
+  }
+  header h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 2.6rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+  header .rule {
+    width: 56px;
+    height: 2px;
+    background: var(--accent);
+    border: none;
+    margin: 0 0 14px;
+  }
+  header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+    max-width: 46ch;
+  }
+  .new-note {
+    max-width: 880px;
+    margin: 0 auto 48px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .new-note textarea {
+    width: 100%;
+    min-height: 76px;
+    resize: vertical;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 0.98rem;
+    font-family: inherit;
+    line-height: 1.5;
+    padding: 0 0 16px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .new-note textarea::placeholder { color: var(--text-faint); }
+  .new-note textarea:focus { outline: none; }
+ 
+  .new-note-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .color-picker { display: flex; gap: 10px; }
+ 
+  .color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    opacity: 0.55;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .color-dot:hover { opacity: 0.85; }
+  .color-dot.selected {
+    opacity: 1;
+    border-color: var(--text);
+    transform: scale(1.12);
+  }
+
+  button#addNoteBtn {
+    background: var(--accent);
+    color: #1c1c1c;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 5px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  button#addNoteBtn:hover { background: #d1ab6e; }
+ 
+  #notesBoard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .note {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--slate); /* category shows as a quiet stripe, not a fill */
+    border-radius: 6px;
+    min-height: 140px;
+    padding: 18px 16px 16px;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .note:hover { background: var(--surface-2); }
+ 
+  .note.slate { border-left-color: var(--slate); }
+  .note.sage  { border-left-color: var(--sage); }
+  .note.clay  { border-left-color: var(--clay); }
+  .note.plum  { border-left-color: var(--plum); }
+ 
+  /* the row of little buttons (edit, delete) in the corner of each note */
+  .note-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 2px;
+  }
+  .icon-btn {
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+  .icon-btn:hover { color: var(--text); background: var(--border-soft); }
+ 
+  .note-text {
+    color: var(--text);
+    padding-right: 34px; 
+  }
+  .note-date {
+    margin-top: 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .empty-message {
+    text-align: center;
+    color: var(--text-muted);
+    grid-column: 1 / -1;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    padding: 40px 0;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 11, 13, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+  .modal-overlay.hidden { display: none; }
+ 
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    width: 100%;
+    max-width: 440px;
+    border-radius: 8px;
+    padding: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .modal-box p#modalDate {
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 14px;
+  }
+  .modal-box textarea#modalTextarea {
+    width: 100%;
+    min-height: 130px;
+    resize: vertical;
+    background: var(--surface-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 12px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+  .modal-box textarea#modalTextarea:focus { outline: 1px solid var(--accent-dim); }
+ 
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .modal-buttons button {
+    border: none;
+    padding: 9px 18px;
+    border-radius: 5px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+ 
+  #modalCloseBtn { background: var(--surface-2); color: var(--text-muted); }
+  #modalCloseBtn:hover { color: var(--text); }
+  #modalSaveBtn  { background: var(--accent); color: #1c1c1c; font-weight: 600; }
+  #modalSaveBtn:hover { background: #d1ab6e; }
+ 
+  /* a general-purpose "hide this element" class, used all over the pop-up */
+  .hidden { display: none !important; }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+    <p class="eyebrow">Notes</p>
+    <h1>Notebook</h1>
+    <hr class="rule">
+  </header>
+ 
+  <div class="new-note">
+    <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+    <div class="new-note-controls">
+    
+      <button id="addNoteBtn">Add Note</button>
+    </div>
+  </div>
+ 
+  <div id="notesBoard"></div>
+ <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-box">
+      <p id="modalDate"></p>
+      <textarea id="modalTextarea"></textarea>
+ 
+      <div class="modal-buttons">
+        <button id="modalCloseBtn">Close</button>
+        <button id="modalSaveBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
