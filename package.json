@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "node -e \"console.log('Build complete')\"",
+    "build": "node -e \"const fs = require('fs'); fs.mkdirSync('public', {recursive: true}); ['index.html','style.css','script.js'].forEach(f => { if(fs.existsSync(f)) fs.copyFileSync(f, 'public/' + f); }); console.log('Build complete');\"",
     "lint": "node -e \"console.log('No lint errors')\""
   },
   "dependencies": {
