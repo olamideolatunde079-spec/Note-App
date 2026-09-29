@@ -3,36 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notebook - Sticky Notes</title>
+    <meta name="description" content="A notebook and sticky notes app for creating, editing, and organizing notes.">
+    <meta property="og:title" content="Notebook - Sticky Notes">
+    <meta property="og:description" content="A notebook and sticky notes app for creating, editing, and organizing notes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <div class="app-container">
     <header>
-    <p class="eyebrow">My Notepad</p>
-    <h1>Notebook</h1>
-    <hr class="rule">
-  </header>
- 
-  <div class="new-note">
-    <textarea id="noteInput" placeholder="Write your note here..."></textarea>
-    <div class="new-note-controls">
-    
-      <button id="addNoteBtn">Add Note</button>
-    </div>
-  </div>
- 
-  <div id="notesBoard"></div>
- <div class="modal-overlay hidden" id="modalOverlay">
-    <div class="modal-box">
-      <p id="modalDate"></p>
-      <textarea id="modalTextarea"></textarea>
- 
-      <div class="modal-buttons">
-        <button id="modalCloseBtn">Close</button>
-        <button id="modalSaveBtn">Save Changes</button>
+      <div class="header-top">
+        <div>
+          <p class="eyebrow">My Notepad</p>
+          <h1>Notebook</h1>
+        </div>
+        <div class="header-actions">
+          <button id="themeToggleBtn" class="header-btn" title="Toggle Light/Dark theme">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+            <span id="themeLabel">Light</span>
+          </button>
+          <button id="exportBtn" class="header-btn" title="Export notes as backup (JSON)">
+            <i class="fa-solid fa-download"></i>
+            <span>Export</span>
+          </button>
+          <label for="importInput" class="header-btn" title="Import notes from backup file">
+            <i class="fa-solid fa-upload"></i>
+            <span>Import</span>
+          </label>
+          <input type="file" id="importInput" accept=".json" class="hidden">
+        </div>
+      </div>
+      <hr class="rule">
+      <p class="header-desc">Capture quick thoughts, interactive checklists, and ideas with category stripes, instant search, and pin to top.</p>
+    </header>
+   
+    <!-- New Note Input Box -->
+    <div class="new-note">
+      <div class="format-bar">
+        <span class="format-bar-label">Quick insert:</span>
+        <button type="button" class="format-btn" id="formatChecklistBtn" title="Insert checklist checkbox item">
+          <i class="fa-solid fa-list-check"></i> Checklist
+        </button>
+        <button type="button" class="format-btn" id="formatBulletBtn" title="Insert bullet list item">
+          <i class="fa-solid fa-list-ul"></i> Bullet
+        </button>
+        <button type="button" class="format-btn" id="formatBoldBtn" title="Insert bold formatting">
+          <i class="fa-solid fa-bold"></i> Bold
+        </button>
+        <button type="button" class="format-btn" id="formatTimeBtn" title="Insert current date & timestamp">
+          <i class="fa-regular fa-calendar-plus"></i> Date
+        </button>
+      </div>
+
+      <textarea id="noteInput" placeholder="Write your note here... (Press Ctrl + Enter to save, use - [ ] for checklists)"></textarea>
+      
+      <div class="new-note-controls">
+        <div class="picker-group">
+          <span class="control-label">Category:</span>
+          <div class="color-picker" id="createColorPicker">
+            <button type="button" class="color-dot slate selected" data-color="slate" title="Slate (Work / Tasks)" aria-label="Slate category"></button>
+            <button type="button" class="color-dot sage" data-color="sage" title="Sage (Ideas / Growth)" aria-label="Sage category"></button>
+            <button type="button" class="color-dot clay" data-color="clay" title="Clay (Personal / Daily)" aria-label="Clay category"></button>
+            <button type="button" class="color-dot plum" data-color="plum" title="Plum (Important / Urgent)" aria-label="Plum category"></button>
+          </div>
+        </div>
+
+        <div class="new-note-right">
+          <span id="charCount" class="counter-text">0 words · 0 chars</span>
+          <button id="addNoteBtn" class="primary-btn">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Note</span>
+          </button>
+        </div>
       </div>
     </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="toolbar">
+      <div class="toolbar-top">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Search notes by content... (Press / to focus)" autocomplete="off">
+          <button id="clearSearchBtn" class="clear-search-btn hidden" title="Clear search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="sort-control">
+          <i class="fa-solid fa-arrow-down-short-wide"></i>
+          <select id="sortSelect" title="Sort notes">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="az">A–Z (Alphabetical)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-filter="all">All <span class="tab-count" id="countAll">0</span></button>
+        <button class="filter-tab" data-filter="pinned"><i class="fa-solid fa-thumbtack"></i> Pinned <span class="tab-count" id="countPinned">0</span></button>
+        <button class="filter-tab" data-filter="slate"><span class="tab-dot slate"></span> Slate <span class="tab-count" id="countSlate">0</span></button>
+        <button class="filter-tab" data-filter="sage"><span class="tab-dot sage"></span> Sage <span class="tab-count" id="countSage">0</span></button>
+        <button class="filter-tab" data-filter="clay"><span class="tab-dot clay"></span> Clay <span class="tab-count" id="countClay">0</span></button>
+        <button class="filter-tab" data-filter="plum"><span class="tab-dot plum"></span> Plum <span class="tab-count" id="countPlum">0</span></button>
+        <button class="filter-tab" data-filter="archived"><i class="fa-solid fa-box-archive"></i> Archived <span class="tab-count" id="countArchived">0</span></button>
+      </div>
+    </div>
+
+    <!-- Live Results Summary (when filtering or searching) -->
+    <div id="resultsInfo" class="results-info hidden"></div>
+   
+    <!-- Notes Board Grid -->
+    <div id="notesBoard"></div>
+  </div>
+
+  <!-- Edit Note Modal -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fa-regular fa-pen-to-square"></i> Edit Note</h3>
+        <button id="modalCloseIconBtn" class="modal-close-icon" title="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-meta-row">
+        <p id="modalDate"></p>
+        <div class="modal-color-picker">
+          <span class="control-label">Category:</span>
+          <div class="color-picker" id="modalColorPicker">
+            <button type="button" class="color-dot slate" data-color="slate" title="Slate" aria-label="Slate category"></button>
+            <button type="button" class="color-dot sage" data-color="sage" title="Sage" aria-label="Sage category"></button>
+            <button type="button" class="color-dot clay" data-color="clay" title="Clay" aria-label="Clay category"></button>
+            <button type="button" class="color-dot plum" data-color="plum" title="Plum" aria-label="Plum category"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="format-bar">
+        <span class="format-bar-label">Insert:</span>
+        <button type="button" class="format-btn" id="modalFormatChecklistBtn" title="Insert checklist item">
+          <i class="fa-solid fa-list-check"></i> Checklist
+        </button>
+        <button type="button" class="format-btn" id="modalFormatBulletBtn" title="Insert bullet list item">
+          <i class="fa-solid fa-list-ul"></i> Bullet
+        </button>
+        <button type="button" class="format-btn" id="modalFormatBoldBtn" title="Bold text">
+          <i class="fa-solid fa-bold"></i> Bold
+        </button>
+      </div>
+
+      <textarea id="modalTextarea" placeholder="Edit your note..."></textarea>
+      
+      <div class="modal-footer-stats">
+        <span id="modalCharCount" class="counter-text">0 words · 0 chars</span>
+      </div>
+ 
+      <div class="modal-buttons">
+        <button id="modalDuplicateBtn" class="secondary-btn" title="Create a duplicate copy of this note"><i class="fa-regular fa-clone"></i> Duplicate</button>
+        <button id="modalCloseBtn" class="secondary-btn"><i class="fa-solid fa-xmark"></i> Close</button>
+        <button id="modalSaveBtn" class="primary-btn"><i class="fa-solid fa-check"></i> Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification with Undo Support -->
+  <div id="toast" class="toast hidden">
+    <span id="toastMessage"></span>
+    <button id="toastActionBtn" class="toast-action hidden">Undo</button>
   </div>
 
 <script src="script.js"></script>

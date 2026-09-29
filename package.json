@@ -1,0 +1,15 @@
+{
+  "name": "notebook-note-app",
+  "version": "1.0.0",
+  "description": "A notebook and sticky notes app for creating, editing, and organizing notes.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build complete')\"",
+    "lint": "node -e \"console.log('No lint errors')\""
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

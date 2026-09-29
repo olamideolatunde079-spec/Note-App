@@ -1,0 +1,8 @@
+{
+  "name": "Notebook - Sticky Notes",
+  "description": "A notebook and sticky notes app for creating, editing, and organizing notes.",
+  "prompt": "A notebook and sticky notes app with edit, delete, and relative timestamp features.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
