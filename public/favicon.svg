@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="hexGlow" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1b2a4a" />
+      <stop offset="60%" stop-color="#0b1329" />
+      <stop offset="100%" stop-color="#060b17" />
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <g id="sphere-wrapper">
+    <!-- Ambient floating particle dots outside sphere -->
+    <g fill="#64748b" opacity="0.6">
+      <circle cx="160" cy="75" r="1.5" />
+      <circle cx="280" cy="65" r="2" />
+      <circle cx="370" cy="140" r="1.5" />
+      <circle cx="390" cy="180" r="2.5" />
+      <circle cx="375" cy="245" r="2" />
+      <circle cx="365" cy="305" r="3" />
+      <circle cx="340" cy="360" r="2.5" />
+      <circle cx="320" cy="390" r="2" />
+      <circle cx="285" cy="420" r="2" />
+      <circle cx="230" cy="425" r="2" />
+      <circle cx="180" cy="395" r="2.5" />
+      <circle cx="170" cy="350" r="1.5" />
+    </g>
+
+    <!-- Top-Left Hexagonal Dome -->
+    <!-- Row 1: Top Apex -->
+    <polygon points="250,78 268,88 268,110 250,120 232,110 232,88" fill="url(#hexGlow)" />
+    <polygon points="212,98 230,108 230,130 212,140 194,130 194,108" fill="url(#hexGlow)" />
+    <polygon points="288,98 306,108 306,130 288,140 270,130 270,108" fill="url(#hexGlow)" />
+
+    <!-- Row 2 -->
+    <polygon points="174,118 192,128 192,150 174,160 156,150 156,128" fill="url(#hexGlow)" />
+    <polygon points="250,122 268,132 268,154 250,164 232,154 232,132" fill="url(#hexGlow)" />
+    <polygon points="326,118 344,128 344,150 326,160 308,150 308,128" fill="url(#hexGlow)" />
+
+    <!-- Row 3 -->
+    <polygon points="140,146 158,156 158,178 140,188 122,178 122,156" fill="url(#hexGlow)" />
+    <polygon points="212,144 230,154 230,176 212,186 194,176 194,154" fill="url(#hexGlow)" />
+    <polygon points="288,144 306,154 306,176 288,186 270,176 270,154" fill="url(#hexGlow)" />
+    <polygon points="358,146 376,156 376,178 358,188 340,178 340,156" fill="url(#hexGlow)" />
+
+    <!-- Row 4 -->
+    <polygon points="118,184 136,194 136,216 118,226 100,216 100,194" fill="url(#hexGlow)" />
+    <polygon points="174,182 192,192 192,214 174,224 156,214 156,192" fill="url(#hexGlow)" />
+    <polygon points="248,182 266,192 266,214 248,224 230,214 230,192" fill="url(#hexGlow)" />
+    <polygon points="322,182 340,192 340,214 322,224 304,214 304,192" fill="url(#hexGlow)" />
+
+    <!-- Row 5 (Left & Center-Left) -->
+    <polygon points="106,230 124,240 124,262 106,272 88,262 88,240" fill="url(#hexGlow)" />
+    <polygon points="144,228 162,238 162,260 144,270 126,260 126,238" fill="url(#hexGlow)" />
+    <polygon points="204,226 222,236 222,258 204,268 186,258 186,236" fill="url(#hexGlow)" />
+
+    <!-- Row 6 (Lower Left Hemisphere) -->
+    <polygon points="110,278 128,288 128,310 110,320 92,310 92,288" fill="url(#hexGlow)" />
+    <polygon points="148,276 166,286 166,308 148,318 130,308 130,286" fill="url(#hexGlow)" />
+    <polygon points="190,274 208,284 208,306 190,316 172,306 172,284" fill="url(#hexGlow)" />
+
+    <!-- Row 7 (Curving in at bottom-left) -->
+    <polygon points="132,324 148,333 148,352 132,360 116,352 116,333" fill="url(#hexGlow)" />
+    <polygon points="168,322 184,331 184,350 168,358 152,350 152,331" fill="url(#hexGlow)" />
+
+    <!-- Bottom-Right Wireframe Network / Constellation -->
+    <g stroke="#64748b" stroke-width="1.2" opacity="0.55">
+      <!-- Connective wireframe lines across lower sphere -->
+      <line x1="208" y1="306" x2="250" y2="330" />
+      <line x1="184" y1="350" x2="230" y2="375" />
+      <line x1="250" y1="330" x2="295" y2="320" />
+      <line x1="250" y1="330" x2="275" y2="365" />
+      <line x1="230" y1="375" x2="275" y2="365" />
+      <line x1="275" y1="365" x2="310" y2="385" />
+      <line x1="295" y1="320" x2="335" y2="310" />
+      <line x1="295" y1="320" x2="330" y2="345" />
+      <line x1="330" y1="345" x2="310" y2="385" />
+      <line x1="335" y1="310" x2="370" y2="285" />
+      <line x1="335" y1="310" x2="365" y2="330" />
+      <line x1="330" y1="345" x2="365" y2="330" />
+      <line x1="322" y1="224" x2="355" y2="245" />
+      <line x1="355" y1="245" x2="370" y2="285" />
+      <line x1="358" y1="188" x2="380" y2="225" />
+      <line x1="380" y1="225" x2="355" y2="245" />
+      <line x1="275" y1="365" x2="280" y2="405" />
+      <line x1="230" y1="375" x2="235" y2="415" />
+      <line x1="235" y1="415" x2="280" y2="405" />
+    </g>
+
+    <!-- Constellation Dots & Nodes -->
+    <g fill="#475569">
+      <circle cx="250" cy="330" r="3.5" />
+      <circle cx="230" cy="375" r="3" />
+      <circle cx="275" cy="365" r="4" />
+      <circle cx="295" cy="320" r="3.5" />
+      <circle cx="330" cy="345" r="3" />
+      <circle cx="310" cy="385" r="3" />
+      <circle cx="335" cy="310" r="3.5" />
+      <circle cx="365" cy="330" r="2.5" />
+      <circle cx="370" cy="285" r="3.5" />
+      <circle cx="355" cy="245" r="3" />
+      <circle cx="380" cy="225" r="2.5" />
+      <circle cx="280" cy="405" r="3" />
+      <circle cx="235" cy="415" r="2.5" />
+    </g>
+
+    <!-- Outer dotted cloud -->
+    <g fill="#94a3b8" opacity="0.8">
+      <circle cx="210" cy="390" r="1.8" />
+      <circle cx="260" cy="395" r="2.2" />
+      <circle cx="295" cy="380" r="2" />
+      <circle cx="345" cy="360" r="1.8" />
+      <circle cx="360" cy="265" r="2.2" />
+      <circle cx="340" cy="275" r="2" />
+      <circle cx="305" cy="280" r="2.5" />
+      <circle cx="270" cy="295" r="2.2" />
+      <circle cx="255" cy="265" r="2" />
+      <circle cx="310" cy="250" r="2" />
+      <circle cx="345" cy="220" r="2" />
+    </g>
+
+    <!-- Center Typography 'OlaByt' -->
+    <g transform="translate(210, 260)">
+      <!-- Stylized 'O' Ring -->
+      <g transform="translate(-5, -12)">
+        <circle cx="16" cy="12" r="11" fill="none" stroke="#1b2447" stroke-width="4.5" />
+        <circle cx="16" cy="12" r="7" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="2 3" />
+        <circle cx="16" cy="12" r="3" fill="#1b2447" />
+      </g>
+      
+      <!-- 'laByt' text -->
+      <text x="35" y="10" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.5" fill="#1b2447">laByt</text>
+    </g>
+  </g>
+</svg>

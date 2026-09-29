@@ -424,7 +424,7 @@ function renderNotes() {
         <h3 class="empty-title">
           ${activeFilter === 'archived' 
             ? "No archived notes" 
-            : (isFiltered ? "No matching notes found" : "Your notebook is empty")}
+            : (isFiltered ? "No matching notes found" : "Your ObytNote board is empty")}
         </h3>
         <p class="empty-subtext">
           ${activeFilter === 'archived'
@@ -597,14 +597,14 @@ function downloadSingleNote(id) {
   if (!note) return;
 
   const dateStr = new Date(note.date).toLocaleString();
-  const fileContent = `NOTEBOOK NOTE\nCategory: ${CATEGORY_NAMES[note.color] || note.color}\nDate: ${dateStr}\n----------------------------------------\n\n${note.text}\n`;
+  const fileContent = `OBYTNOTE NOTE\nCategory: ${CATEGORY_NAMES[note.color] || note.color}\nDate: ${dateStr}\n----------------------------------------\n\n${note.text}\n`;
 
   const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   const snippet = note.text.slice(0, 15).replace(/[^a-z0-9]/gi, "_").toLowerCase() || "note";
   a.href = url;
-  a.download = `note-${snippet}-${Date.now()}.txt`;
+  a.download = `obytnote-${snippet}-${Date.now()}.txt`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -745,7 +745,7 @@ function exportNotes() {
 
   const exportData = {
     exportedAt: new Date().toISOString(),
-    app: "Notebook Sticky Notes",
+    app: "ObytNote",
     count: notes.length,
     notes: notes
   };
@@ -754,7 +754,7 @@ function exportNotes() {
   const downloadAnchor = document.createElement("a");
   const dateFormatted = new Date().toISOString().slice(0, 10);
   downloadAnchor.setAttribute("href", jsonString);
-  downloadAnchor.setAttribute("download", `notebook-notes-${dateFormatted}.json`);
+  downloadAnchor.setAttribute("download", `obytnote-notes-${dateFormatted}.json`);
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();

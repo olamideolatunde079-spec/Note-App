@@ -1,12 +1,12 @@
 {
-  "name": "notebook-note-app",
+  "name": "obytnote",
   "version": "1.0.0",
-  "description": "A notebook and sticky notes app for creating, editing, and organizing notes.",
+  "description": "ObytNote - A smart notebook and sticky notes app for creating, editing, and organizing notes.",
   "main": "server.js",
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "node -e \"const fs = require('fs'); fs.mkdirSync('public', {recursive: true}); ['index.html','style.css','script.js'].forEach(f => { if(fs.existsSync(f)) fs.copyFileSync(f, 'public/' + f); }); console.log('Build complete');\"",
+    "build": "node -e \"const fs = require('fs'); fs.mkdirSync('public/src/assets/images', {recursive: true}); ['index.html','style.css','script.js','favicon.png','favicon.svg','logo.svg','favicon.jpg'].forEach(f => { if(fs.existsSync(f)) fs.copyFileSync(f, 'public/' + f); }); if (fs.existsSync('src/assets/images')) { fs.cpSync('src', 'public/src', {recursive: true}); } console.log('Build complete');\"",
     "lint": "node -e \"console.log('No lint errors')\""
   },
   "dependencies": {
